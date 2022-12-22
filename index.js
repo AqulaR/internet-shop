@@ -3,6 +3,7 @@ const http = require("http");
 const path = require("path");
 const app = express();
 const server = http.createServer(app);
+const port = 3000;
 const fs = require('fs');
 
 let jsonfile = require('jsonfile');
@@ -149,5 +150,10 @@ app.delete('/book/:id', (req, res) => {
   })
 })
 
-console.log("server is running");
-server.listen(3000)
+server.listen(port, () => {
+	console.log("\x1b[35m%s\x1b[0m", `The server is running on the port ${port}`);
+	console.log("\x1b[32m%s\x1b[0m", `http://localhost:${port}/`);
+	// console.log(`Worker ${cluster.worker.id} launched`);
+});
+
+module.exports = { server, app };
