@@ -33,7 +33,6 @@ app.get('/book', (req, res) => {
   res.send(JSON.stringify(file, null, '\t'))
 });
 
-
 app.get('/book/:id', (req, res) => {
   res.status(200).type('text/plain')
   let id = req.params.id;
@@ -150,10 +149,6 @@ app.delete('/book/:id', (req, res) => {
   })
 })
 
-server.listen(port, () => {
-	console.log("\x1b[35m%s\x1b[0m", `The server is running on the port ${port}`);
-	console.log("\x1b[32m%s\x1b[0m", `http://localhost:${port}/`);
-	// console.log(`Worker ${cluster.worker.id} launched`);
-});
+server.listen(port, () => console.log('started'))
 
-module.exports = { server, app };
+module.exports = app
