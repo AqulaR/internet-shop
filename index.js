@@ -29,27 +29,47 @@ app.use((err, req, res, next) => {
 
 
 app.get('/book', (req, res) => {
-  res.status(200).type('text/plain')
-  res.send(JSON.stringify(file, null, '\t'))
+  /*res.status(200).type('text/plain')
+  res.send(JSON.stringify(file, null, '\t'))*/
+  return res.status(200).json({
+    success: "true",
+    message: "books",
+    book: file,
+  });
 });
 
 app.get('/book/:id', (req, res) => {
-  res.status(200).type('text/plain')
+  /*res.status(200).type('text/plain')
   let id = req.params.id;
-  res.send(JSON.stringify(file[id], null, '\t'))
+  res.send(JSON.stringify(file[id], null, '\t'))*/
+  return res.status(200).json({
+    success: "true",
+    message: "book-id",
+    book: file[req.params.id]
+  });
 });
 
 app.get('/book/:id/users', (req, res) => {
-  res.status(200).type('text/plain')
+  /*res.status(200).type('text/plain')
   let id = req.params.id;
-  res.send(JSON.stringify(file[id].users, null, '\t'))
+  res.send(JSON.stringify(file[id].users, null, '\t'))*/
+  return res.status(200).json({
+    success: "true",
+    message: "book-id-users",
+    users: file[req.params.id].users
+  });
 });
 
 app.get('/book/:bid/:uid', (req, res) => {
-  res.status(200).type('text/plain')
+  /*res.status(200).type('text/plain')
   let bid = req.params.bid;
   let uid = req.params.uid;
-  res.send(JSON.stringify(file[bid].users[uid], null, '\t'))
+  res.send(JSON.stringify(file[bid].users[uid], null, '\t'))*/
+  return res.status(200).json({
+    success: "true",
+    message: "book-id-user-id",
+    user: file[req.params.bid].users[req.params.uid]
+  });
 });
 
 app.post('/book', (req, res) => {
