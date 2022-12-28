@@ -5,13 +5,30 @@ const app = express();
 const server = http.createServer(app);
 const port = 3000;
 const fs = require('fs');
-
 let jsonfile = require('jsonfile');
 let file = jsonfile.readFileSync('data.json');
+const session = require('express-session')
+
+const auth = require('./routes/auth.js');
+const refreshToken = require("./routes/refreshToken.js");
+
+app.use(session({
+  name : 'session',
+  secret : 'shlagbaum',
+  resave : true,
+  saveUninitialized: false,
+  cookie : {
+          maxAge:(1000 * 60 * 100)
+  },
+  refreshToken : ''
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.disable("x-powered-by");
+
+app.use("/api", auth);
+app.use("/api/refreshToken", refreshToken);
 
 app.use((err, req, res, next) => {
 	logger.error(err.stack);
@@ -26,7 +43,6 @@ app.use((err, req, res, next) => {
 		});
 	}
 });
-
 
 app.get('/book', (req, res) => {
   /*res.status(200).type('text/plain')
