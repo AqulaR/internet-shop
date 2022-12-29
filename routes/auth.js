@@ -82,11 +82,9 @@ router.post("/logIn", async (req, res) => {
         console.log(err);
         res.status(500).json({message: "Error: Internal Server Error" });
     }
-    console.log(req.session['refreshToken']);
 });
 
 router.get('/profile', (req, res) => {
-    console.log(req.session['refreshToken']);
     try {
         jf.readFile('./models/users.json', (err, obj) => {
             if (err) throw err
@@ -94,7 +92,7 @@ router.get('/profile', (req, res) => {
             let uid = jf.readFileSync('./models/UserToken.json').find(el => el.token == req.session.refreshToken);
             if (uid) uid = uid.userId;
             else return res.status(400).json({message: "Token Not Found"});
-            const user = fileObj.users.find(el => el.id == uid)
+            const user = fileObj.find(el => el.id == uid)
             return res.status(200).json({
                 uid: uid,
                 username: user.username,
