@@ -9,6 +9,7 @@ const file = path.join('./models/users.json')
 const jf = require('jsonfile');
 
 const User = jf.readFileSync(file);
+const middleware = require('../middleware/checktoken.js')
 
 function emailValidate(email) {
     return email.toLowerCase()
@@ -37,7 +38,8 @@ router.post("/signUp", async (req, res) => {
             id: User.length,
             username: req.body.username,
             email: req.body.email,
-            password: hashPassword
+            password: hashPassword,
+            role: "user"
         }
 
         User.push(newUser)
@@ -84,7 +86,7 @@ router.post("/logIn", async (req, res) => {
     }
 });
 
-router.get('/profile', (req, res) => {
+router.get('/profile', middleware, (req, res) => {
     try {
         jf.readFile('./models/users.json', (err, obj) => {
             if (err) throw err
@@ -96,7 +98,8 @@ router.get('/profile', (req, res) => {
             return res.status(200).json({
                 uid: uid,
                 username: user.username,
-                email: user.email
+                email: user.email,
+                role: user.role
             })
         })
     } catch (err) {

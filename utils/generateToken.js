@@ -10,7 +10,7 @@ const UserToken = jf.readFileSync(file2);
 
 const generateTokens = async (user) => {
     try {
-        const payload = { id: user.id, roles: user.roles };
+        const payload = { id: user.id, roles: user.role };
         const accessToken = jwt.sign(
             payload,
             process.env.ACCESS_TOKEN_PRIVATE_KEY,

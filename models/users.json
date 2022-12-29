@@ -3,18 +3,28 @@
     "id": 0,
     "username": "privet",
     "email": "asd@sdf.com",
-    "password": "$2b$10$DS9.dnl8sDXnd43vY1qBiuqOgUSFMwvLZEQFlM8vEAzIF.dKTlVDG"
+    "password": "$2b$10$DS9.dnl8sDXnd43vY1qBiuqOgUSFMwvLZEQFlM8vEAzIF.dKTlVDG",
+    "role": "user"
   },
   {
     "id": 1,
     "username": "Maks",
     "email": "Maks@chert.com",
-    "password": "$2b$10$CD5bqbMXDpS7aA3h7v0SPeT8zERzYcr9nNwk4PA1yhBpaDf/KrzDm"
+    "password": "$2b$10$CD5bqbMXDpS7aA3h7v0SPeT8zERzYcr9nNwk4PA1yhBpaDf/KrzDm",
+    "role": "user"
   },
   {
     "id": 2,
     "username": "Daniil",
     "email": "daniil@chertov.com",
-    "password": "$2b$10$xOu0n1o83piP2aR.m.b90uUK7SFy8e55leNefxME2bwuBCIE3h/c2"
+    "password": "$2b$10$xOu0n1o83piP2aR.m.b90uUK7SFy8e55leNefxME2bwuBCIE3h/c2",
+    "role": "user"
+  },
+  {
+    "id": 3,
+    "username": "Nikolay",
+    "email": "nikolay@sobolev.com",
+    "password": "$2b$10$XqyVeEiewzwsekfTtUD2GeQYpZXqea.b95SfA3lYDlZBZTyVydrzS",
+    "role": "admin"
   }
 ]
