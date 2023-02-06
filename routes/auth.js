@@ -48,6 +48,7 @@ router.post("/signUp", async (req, res) => {
         res.status(201).json({message: "Account created sucessfully", user: newUser });
     } catch (err) {
         console.log(err);
+
         res.status(500).json({message: "Error: Internal Server Error" });
     }
 });
@@ -82,6 +83,7 @@ router.post("/logIn", async (req, res) => {
         });
     } catch (err) {
         console.log(err);
+        logger.error('error in login: '+err)
         res.status(500).json({message: "Error: Internal Server Error" });
     }
 });
@@ -104,6 +106,7 @@ router.get('/profile', middleware, (req, res) => {
         })
     } catch (err) {
         console.log(err);
+        logger.error('error in login: '+err)
         res.status(500).json({message: "Error: Internal Server Error" });
     }
 })

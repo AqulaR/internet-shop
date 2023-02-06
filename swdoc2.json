@@ -1,0 +1,636 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BOOK API",
+    "description": "This is a book-api doc",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "book-api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "book"
+    },
+    {
+      "name": "authorization"
+    },
+    {
+      "name": "logout"
+    },
+    {
+      "name": "profile"
+    }
+  ],
+  "paths": {
+    "/book": {
+      "get": {
+        "tags": [
+          "book"
+        ],
+        "summary": "return all books",
+        "operationId": "getBooks",
+        "responses": {
+          "200": {
+            "description": "all works well",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "object",
+                    "example": "{\"success\":\"true\",\"message\":\"books\",\"book\":[{\"id\":0,\"amount\":2,\"name\":\"Чистовик\",\"author\":\"Сергей Лукьяненко\",\"relise\":\"2007\",\"users\":[{\"id\":0,\"name\":\"Николай Лебедев\",\"datein\":\"19.02.2018\",\"dateout\":\"20.04.2018\"},{\"id\":1,\"name\":\"Данииил Кузьмин\",\"datein\":\"21.04.2018\",\"dateout\":\"26.04.2018\"},{\"id\":2,\"name\":\"Илья Коновалов\",\"datein\":\"21.09.2018\",\"dateout\":\"26.09.2018\"}]},{\"id\":1,\"amount\":2,\"name\":\"Чистовик\",\"author\":\"Сергей Лукьяненко\",\"relise\":\"2007\",\"users\":[{\"id\":0,\"name\":\"Sabrina Luna\",\"datein\":\"19.02.2018\",\"dateout\":\"21.02.2018\"},{\"id\":1,\"name\":\"Tommy Walters\",\"datein\":\"21.02.2018\",\"dateout\":\"27.03.2018\"},{\"id\":2,\"name\":\"Kylie Church\",\"datein\":\"03.05.2018\",\"dateout\":\"01.06.2018\"},{\"id\":3,\"name\":\"РАПмавваоиь ва\",\"datein\":\"21.04.2020\",\"dateout\":\"\"},{\"id\":4,\"name\":\"Рdsfdsfsfs\",\"datein\":\"21.04.2021\",\"dateout\":\"\"}]},{\"id\":2,\"amount\":5,\"name\":\"Черновик\",\"author\":\"Сергей Лукьяненко\",\"relise\":\"2005\",\"users\":[{\"id\":0,\"name\":\"Sidney Mccormick\",\"datein\":\"19.02.2020\",\"dateout\":\"21.02.2020\"},{\"id\":1,\"name\":\"OAOAOAOAOAO\",\"datein\":\"03.06.2020\",\"dateout\":\"03.06.2020\"},{\"id\":2,\"name\":\"Lochlan Barrett\",\"datein\":\"03.05.2020\",\"dateout\":\"01.06.2020\"}]}]}"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "denied",
+        "operationId": "postBook",
+        "requestBody": {
+          "description": "book to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/book"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "403": {
+            "description": "access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "object",
+                    "example": "{\"errortype\":\"access denied\"}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/book/{id}": {
+      "get": {
+        "tags": [
+          "book"
+        ],
+        "summary": "return book by ID",
+        "operationId": "getBookByID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "object",
+                    "example": "{\"success\":\"true\",\"message\":\"book\",\"book\":[{\"id\":0,\"amount\":2,\"name\":\"Чистовик\",\"author\":\"Сергей Лукьяненко\",\"relise\":\"2007\",\"users\":[{\"id\":0,\"name\":\"Николай Лебедев\",\"datein\":\"19.02.2018\",\"dateout\":\"20.04.2018\"},{\"id\":1,\"name\":\"Данииил Кузьмин\",\"datein\":\"21.04.2018\",\"dateout\":\"26.04.2018\"},{\"id\":2,\"name\":\"Илья Коновалов\",\"datein\":\"21.09.2018\",\"dateout\":\"26.09.2018\"}]}]}"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token: Access denied"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "book"
+        ],
+        "summary": "put book",
+        "operationId": "putbook",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "book to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/putbook"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "object",
+                    "example": "{\"log\":\"operation succsessful\"}"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token: Access denied"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "book"
+        ],
+        "summary": "delete by ID",
+        "operationId": "delbook",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "object",
+                    "example": "{\"log\":\"operation succsessful\"}"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token: Access denied"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      }
+    },
+    "/book{id}/users": {
+      "get": {
+        "tags": [
+          "book"
+        ],
+        "summary": "return users by book ID",
+        "operationId": "getUsersByBookID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "object",
+                    "example": "{\"success\":\"true\",\"message\":\"book-id\",\"book\":{\"id\":1,\"amount\":2,\"name\":\"Чистовик\",\"author\":\"Сергей Лукьяненко\",\"relise\":\"2007\",\"users\":[{\"id\":0,\"name\":\"Sabrina Luna\",\"datein\":\"19.02.2018\",\"dateout\":\"21.02.2018\"},{\"id\":1,\"name\":\"Tommy Walters\",\"datein\":\"21.02.2018\",\"dateout\":\"27.03.2018\"},{\"id\":2,\"name\":\"Kylie Church\",\"datein\":\"03.05.2018\",\"dateout\":\"01.06.2018\"},{\"id\":3,\"name\":\"РАПмавваоиь ва\",\"datein\":\"21.04.2020\",\"dateout\":\"\"},{\"id\":4,\"name\":\"Рdsfdsfsfs\",\"datein\":\"21.04.2021\",\"dateout\":\"\"}]}}"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token: Access denied"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "denied",
+        "operationId": "postBookUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "book to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/useradd"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "403": {
+            "description": "access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "object",
+                    "example": "{\"errortype\":\"access denied\"}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/book{id}/users{id}": {
+      "get": {
+        "tags": [
+          "book"
+        ],
+        "summary": "return user by book ID",
+        "operationId": "getUserByBookID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "object",
+                    "example": "{\"success\":\"true\",\"message\":\"book-id-user-id\",\"user\":{\"id\":1,\"name\":\"Tommy Walters\",\"datein\":\"21.02.2018\",\"dateout\":\"27.03.2018\"}}"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token: Access denied"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      }
+    },
+    "/api/refreshToken/logout": {
+      "delete": {
+        "tags": [
+          "logout"
+        ],
+        "summary": "delete by ID",
+        "operationId": "deltoken",
+        "responses": {
+          "200": {
+            "description": "delete is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "object",
+                    "example": "{\"log\":\"Logout succsessful\"}"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Token: Access denied"
+          },
+          "404": {
+            "description": "data not found"
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": [
+          "authorization"
+        ],
+        "summary": "login user",
+        "operationId": "loginUser",
+        "requestBody": {
+          "description": "book to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/userlogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "403": {
+            "description": "access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "object",
+                    "example": "{\"errortype\":\"access denied\"}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/signup": {
+      "post": {
+        "tags": [
+          "authorization"
+        ],
+        "summary": "login user",
+        "operationId": "signUpUser",
+        "requestBody": {
+          "description": "book to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/userSignUp"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "403": {
+            "description": "access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "object",
+                    "example": "{\"errortype\":\"email is already exists\"}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/profile": {
+      "get": {
+        "tags": [
+          "profile"
+        ],
+        "summary": "login user",
+        "operationId": "userProfile",
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "403": {
+            "description": "access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "object",
+                    "example": "{\"errortype\":\"something went wrong\"}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "userSignUp": {
+        "required": [
+          "email",
+          "password",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "Danya"
+          },
+          "email": {
+            "type": "string",
+            "example": "Konandoile@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "shlagbaym"
+          }
+        }
+      },
+      "userlogin": {
+        "required": [
+          "password",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "Danya"
+          },
+          "password": {
+            "type": "string",
+            "example": "Konan-doile"
+          }
+        }
+      },
+      "putbook": {
+        "required": [
+          "amount",
+          "author",
+          "name",
+          "relise"
+        ],
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "example": 3
+          },
+          "name": {
+            "type": "string",
+            "example": "Danya"
+          },
+          "author": {
+            "type": "string",
+            "example": "Konan doile"
+          },
+          "relise": {
+            "type": "string",
+            "example": "21-10-2022"
+          }
+        }
+      },
+      "useradd": {
+        "required": [
+          "datein",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Konan doile"
+          },
+          "datein": {
+            "type": "string",
+            "example": "21-10-2022"
+          }
+        }
+      },
+      "book": {
+        "required": [
+          "amount",
+          "author",
+          "id",
+          "name",
+          "relise",
+          "users"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "amount": {
+            "type": "integer",
+            "example": 3
+          },
+          "name": {
+            "type": "string",
+            "example": "Danya"
+          },
+          "author": {
+            "type": "string",
+            "example": "Konan doile"
+          },
+          "relise": {
+            "type": "string",
+            "example": "21-10-2022"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  }
+}

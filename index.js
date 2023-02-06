@@ -11,6 +11,9 @@ const session = require('express-session')
 const auth = require('./routes/auth.js');
 const refreshToken = require("./routes/refreshToken.js");
 
+const swaggerui = require('swagger-ui-express');
+const swaggerdoc = require('./swdoc2.json')
+
 app.use(session({
   name : 'session',
   secret : 'shlagbaum',
@@ -45,6 +48,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use('/book', booksRouter)
+app.use('/swdoc', swaggerui.serve, swaggerui.setup(swaggerdoc))
 
 server.listen(port, () => console.log('started'))
 

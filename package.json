@@ -33,7 +33,9 @@
 		"save-dev": "^0.0.1-security",
 		"session": "^0.1.0",
 		"supertest": "^6.3.3",
-		"validator": "^13.7.0"
+		"swagger-ui-express": "^4.6.0",
+		"validator": "^13.7.0",
+		"winston": "^3.8.2"
 	},
 	"devDependencies": {
 		"@faker-js/faker": "^7.6.0",

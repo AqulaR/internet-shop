@@ -26,5 +26,12 @@
     "email": "nikolay@sobolev.com",
     "password": "$2b$10$XqyVeEiewzwsekfTtUD2GeQYpZXqea.b95SfA3lYDlZBZTyVydrzS",
     "role": "admin"
+  },
+  {
+    "id": 4,
+    "username": "Danya",
+    "email": "Konandoile@gmail.com",
+    "password": "$2b$10$85o/qv/jmJe.ULlkrYjhHOfSllsi7jNbDMdN8W7BucJ9fnZ/e2jxq",
+    "role": "user"
   }
 ]

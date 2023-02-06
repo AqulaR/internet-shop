@@ -41,6 +41,7 @@ router.delete("/logout", middleware, async (req, res) => {
         });
     } catch (err) {
         console.log(err);
+        logger.error('error in login: '+err)
         res.status(500).json({message: "Error: Internal Server Error" });
     }
 });
